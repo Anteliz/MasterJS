@@ -1,9 +1,12 @@
 'use strinct'
 
 var validator = require('validator');
-const { findByIdAndUpdate } = require('../models/article');
-const article = require('../models/article');
-var Article = require('../models/article')
+var fs = require('fs');
+var path = require('path');
+// const { findByIdAndUpdate } = require('../models/article');
+// const article = require('../models/article');
+var Article = require('../models/article');
+const { exists } = require('../models/article');
 
 var controller = {
     datosCurso: (req, res) => {
@@ -211,9 +214,106 @@ var controller = {
                 article: articleRemoved
             });
         });
-        return res.status(500).send({
-            status: 'Error',
-            message: 'test de delete'
+    }, 
+
+    upload: (req, res) => {
+        // Configurar el módulo del connect multiparty route/article.js
+
+
+        //Recoger el fichero de la petición
+        var file_name = 'Imagen no disponible.';
+
+        if(!req.files){
+            return res.status(404).send({
+                status: 'error',
+                message: file_name
+            })
+        }
+
+        //Conseguir el nombre y la extensión del archivo
+        var file_path = req.files.file0.path;
+        var file_split = file_path.split('\\');
+
+        // *Advertencia* en Linux o MAC
+        // var file_split = file_path.split('/');
+
+        // Nombre del archivo
+        var file_name = file_split[2];
+
+        // Extensión del fichero
+        var ext_split = file_name.split('\.');
+        var file_ext = ext_split[1];
+
+        //Comprobar la extensaión, solo imagenes, si no es valida borrar el fichero
+        if(file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif'){
+            // Borrar el archivo subido
+            fs.unlink(file_path, (err) =>{
+                return res.status(200).send({
+                    status: 'error',
+                    message: 'La extensión de la imagen no es válida'
+                })
+            });
+        }
+        else{
+            //Si todo es valido, obtengo el id de la url
+            var articleId = req.params.id 
+            return Article.findByIdAndUpdate({_id: articleId}, {image: file_name}, {new: true}, (err, articleUpdated) => {
+                if(err || !articleUpdated){
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'Error al guardar la imagen del artículo'
+                    });
+                }
+                
+                return res.status(200).send({
+                    status: 'Success',
+                    article: articleUpdated
+                });
+            });            
+        }
+    }, 
+
+    getImage: (req, res) =>{
+        var file = req.params.image;
+        var path_file = './upload/articles/'+file;
+        if(fs.existsSync(path_file)){
+            return res.sendFile(path.resolve(path_file));
+        }
+        else{
+            return res.status(404).send({
+                status: 'error',
+                message: 'La imagen no existe'
+            });
+        }        
+    },
+
+    search: (req, res) => {
+        //Sacar el strung a buscar
+        var searchString = req.params.search;
+
+        // Find Or
+        return Article.find({"$or": [
+            {"title": {"$regex": searchString, "$options": "i"}},
+            {"content": {"$regex": searchString, "$options": "i"}}
+        ]})
+        .sort([['date', 'descending']])
+        .exec((err, articles) =>{
+            if(err){
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'Error en la petición'
+                });
+            }
+            if(!articles || articles.length <= 0){
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No hay artículos que coincidan con tu busqueda'
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                articles
+            });
         });
     }
 }

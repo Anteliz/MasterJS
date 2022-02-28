@@ -1,0 +1,9 @@
+<h2 class="subheader"> Página de Angular </h2>
+<div *ngIf="nombre && apellidos">
+    <h3>El nombre completo es: {{nombre}} {{apellidos}}</h3>
+</div>
+<div *ngIf="!nombre || !apellidos">
+    <h3>No hay parametros por la URL</h3>
+</div>
+
+<button (click)="redireccion()">Ponme nombre y apellidos</button>
