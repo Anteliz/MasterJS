@@ -1,4 +1,7 @@
-<div id="slider" class="slider-big">
-    <h1>Bienvenido al Master de FrameWorks</h1>
-    <a href="#" class="btn-white">Ir al blog</a>
+<div id="slider" class="slider-big" [ngClass]="{
+    'slider-big': !size || size == 'big',
+    'slider-small': size == 'small'
+}">
+    <h1>{{nombre}}</h1>
+    <a [routerLink]="['/blog']" class="btn-white" *ngIf="!size || size == 'big'">Ir al blog</a>
 </div>

@@ -1,1 +1,10 @@
-<h2 class="subheader"> Blog </h2>
+<app-slider [nombre]="'Blog'" [size]="'small'"></app-slider>
+<div class="center">
+    <section id="content">
+        <h2 class="subheader"> Blog </h2>
+        <div class="article-item" *ngFor="let article of articles">
+            <h3>{{article.title}}</h3>
+        </div>
+    </section>
+    <app-sidebar></app-sidebar>
+</div>

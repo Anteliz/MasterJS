@@ -331,6 +331,24 @@ textarea{
     border: none;
 }
 
+.year-green{
+    display: block;
+    background: #00C851;
+    color: #eee;
+    padding: 5px;
+    width: 121px;
+    text-align: center;
+}
+
+.year-red{
+    display: block;
+    background: #ff0000;
+    color: #eee;
+    padding: 5px;
+    width: 121px;
+    text-align: center;
+}
+
 /* Responsive */
 
 /* Desde la anchura de 0px hasta 1488px */
