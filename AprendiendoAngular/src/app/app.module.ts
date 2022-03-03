@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
+// import * as moment from 'moment';
+import {MomentModule} from 'ngx-moment';
 
 import { AppComponent } from './app.component';
 import { MiComponente } from './components/mi-componente/mi-componente.component';
@@ -19,6 +21,9 @@ import { PeliculaComponent } from './components/pelicula/pelicula.component';
 import { EsParPipe } from './pipes/espar.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ArticlesComponent } from './components/articles/articles.component';
+import { ArticleComponent } from './components/article/article.component';
+// import { allowedNodeEnvironmentFlags } from 'process';
 
 @NgModule({
   declarations: [
@@ -37,13 +42,16 @@ import { HttpClientModule } from '@angular/common/http';
     ErrorComponent,
     PeliculaComponent,
     EsParPipe,
+    ArticlesComponent,
+    ArticleComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    routing
+    routing,
+    MomentModule,
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

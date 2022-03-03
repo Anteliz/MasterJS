@@ -2,9 +2,7 @@
 <div class="center">
     <section id="content">
         <h2 class="subheader"> Blog </h2>
-        <div class="article-item" *ngFor="let article of articles">
-            <h3>{{article.title}}</h3>
-        </div>
+        <app-articles [articles]="articles"></app-articles> 
     </section>
     <app-sidebar></app-sidebar>
 </div>
