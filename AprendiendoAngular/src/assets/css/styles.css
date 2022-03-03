@@ -182,6 +182,10 @@ body{
     margin-top: 10px;
 }
 
+.buttons{
+    margin-top: 30px;
+}
+
 .btn{
     display: block;
     background: black;
@@ -195,6 +199,7 @@ body{
     transition: 300ms all;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
 
 .btn-success{
@@ -203,6 +208,26 @@ body{
 
 .btn-success:hover{
     background: #007E33;
+}
+
+.btn-warning{
+    background: #ffbb33;
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-warning:hover{
+    background: #FF8800;
+}
+
+.btn-danger{
+    background: #ff4444;
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-danger:hover{
+    background: #CC0000;
 }
 
 .mid-form{

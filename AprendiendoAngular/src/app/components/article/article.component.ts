@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
+import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-article',
@@ -11,20 +12,38 @@ import { Article } from 'src/app/models/article';
 })
 export class ArticleComponent implements OnInit {
 
+  public article: Article;
+  public url: string;
+
   constructor(
-    public _articleService: ArticleService,
+    private _articleService: ArticleService,
     private _route: ActivatedRoute,
-    // private article: Article,
-    // private _router: Router
+    private _router: Router
   ){
+    this.article = {
+      _id: '',
+      title: '',
+      content: '',
+      image: '',
+      date: ''
+    };
+    this.url = Global.url;
   }
 
   ngOnInit(): void {
     this._route.params.subscribe((params: Params) =>{
       let id = params['id']
       this._articleService.getArticle(id).subscribe({
-        next: response => {console.log(response)},
-        error: error => console.log("error", error),
+        next: response => {
+          if(response.article){
+            this.article= response.article;
+          }
+          else{
+            this._router.navigate(['/home']);
+          }
+        },
+        error: error => 
+        this._router.navigate(['/home']),
       });
     });
   }

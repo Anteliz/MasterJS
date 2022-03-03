@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { ArticleComponent } from './components/article/article.component';
+import { SearchComponent } from './components/search/search.component';
 // import { allowedNodeEnvironmentFlags } from 'process';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ArticleComponent } from './components/article/article.component';
     EsParPipe,
     ArticlesComponent,
     ArticleComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

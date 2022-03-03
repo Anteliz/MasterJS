@@ -1,24 +1,23 @@
-<app-slider [nombre]="'Articulo'" [size]="'small'"></app-slider>
+
 <div class="center">
     <section id="content">
-        <h2 class="subheader"> Nombre artículo </h2>
         <article class="article-item article-detail">
             <div class="image-wrap">
-                <img src="" alt="paisaje">
+                <img src="{{url + 'get-image/' + article.image}}" alt="{{article.title}}" *ngIf="article.image">
+                <img src="assets/css/images/noimage.jpg" alt="{{article.title}}" *ngIf="!article.image">
             </div>
-            <h1 class="subheader">Artículo de Prueba</h1>
+            <h1 class="subheader">{{article.title}}</h1>
             <span class="date">
-                Hace 5 min
+                {{article.date | amLocale: 'es' | amTimeAgo}}
             </span>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac vehicula elit, in sodales neque. Praesent volutpat mollis neque ut congue. Aliquam placerat neque eu magna eleifend euismod. Duis gravida enim quis diam placerat, in viverra urna laoreet. Cras pretium rhoncus ex in feugiat. Praesent molestie justo sit amet velit interdum iaculis. Vivamus quis dignissim tortor. Donec mattis urna imperdiet enim aliquet venenatis.
+                {{article.content}}
             </p>
-            <p>
-                Sed vitae lectus eu lectus eleifend dignissim sagittis eget urna. Aliquam est felis, euismod quis ipsum ultricies, sollicitudin hendrerit massa. Suspendisse lobortis sed arcu eget convallis. Proin aliquet elit dolor, nec auctor mauris pretium eu. Nunc ultrices fringilla ex, et convallis libero commodo eget. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ut lobortis tortor, ut rhoncus dolor. Curabitur nec nunc sollicitudin, facilisis lectus quis, scelerisque ex. Aliquam ut lectus at mauris cursus laoreet at sit amet nulla. Ut vehicula vel felis et blandit.
-            </p>
-            <p>
-                Integer ligula turpis, hendrerit ac auctor sed, commodo eu nisl. Nullam vitae rhoncus erat. Quisque at aliquet enim. Aliquam rutrum vestibulum gravida. Nam pellentesque justo malesuada ante fringilla suscipit. Donec blandit velit nunc, eget condimentum leo ultrices quis. Cras efficitur euismod libero, sagittis ullamcorper arcu feugiat vitae. Proin at mi enim.
-            </p>
+            <div class="buttons">
+                <a href="#" class="btn btn-warning">Editar</a>
+                <a href="#" class="btn btn-danger">Borrar</a>
+            </div>
+            
             <!-- Limpiar floatado -->
             <div class="clearfix"></div>
         </article>
