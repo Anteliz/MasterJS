@@ -244,7 +244,7 @@ body{
     font-size: 17px;
 }
 
-input[type="text"], textarea{
+input[type="text"], input[type="file"], textarea{
     width: 100%;
     min-height: 30px;
     border: 1px solid #ccc;

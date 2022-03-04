@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
-// import * as moment from 'moment';
 import {MomentModule} from 'ngx-moment';
+
 
 import { AppComponent } from './app.component';
 import { MiComponente } from './components/mi-componente/mi-componente.component';
@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { ArticleComponent } from './components/article/article.component';
 import { SearchComponent } from './components/search/search.component';
+import { ArticleNewComponent } from './components/article-new/article-new.component';
+import { importExpr } from '@angular/compiler/src/output/output_ast';
 // import { allowedNodeEnvironmentFlags } from 'process';
 
 @NgModule({
@@ -46,6 +48,7 @@ import { SearchComponent } from './components/search/search.component';
     ArticlesComponent,
     ArticleComponent,
     SearchComponent,
+    ArticleNewComponent,
   ],
   imports: [
     BrowserModule,
