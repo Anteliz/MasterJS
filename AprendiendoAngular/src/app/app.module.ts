@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing, appRoutingProviders } from './app.routing';
 import {MomentModule} from 'ngx-moment';
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 import { AppComponent } from './app.component';
 import { MiComponente } from './components/mi-componente/mi-componente.component';
@@ -26,6 +26,7 @@ import { ArticleComponent } from './components/article/article.component';
 import { SearchComponent } from './components/search/search.component';
 import { ArticleNewComponent } from './components/article-new/article-new.component';
 import { importExpr } from '@angular/compiler/src/output/output_ast';
+import { ArticleEditComponent } from './components/article-edit/article-edit.component';
 // import { allowedNodeEnvironmentFlags } from 'process';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     ArticleComponent,
     SearchComponent,
     ArticleNewComponent,
+    ArticleEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,7 @@ import { importExpr } from '@angular/compiler/src/output/output_ast';
     HttpClientModule,
     routing,
     MomentModule,
+    AngularFileUploaderModule,
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

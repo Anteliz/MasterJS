@@ -14,8 +14,8 @@
                 {{article.content}}
             </p>
             <div class="buttons">
-                <a href="#" class="btn btn-warning">Editar</a>
-                <a href="#" class="btn btn-danger">Borrar</a>
+                <a [routerLink]="['/blog/editar', article._id]" class="btn btn-warning">Editar</a>
+                <a (click)="delete(article._id)" class="btn btn-danger">Borrar</a> 
             </div>
             
             <!-- Limpiar floatado -->

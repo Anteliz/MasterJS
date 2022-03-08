@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
 import { Global } from 'src/app/services/global';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-article',
@@ -19,7 +20,7 @@ export class ArticleComponent implements OnInit {
     private _articleService: ArticleService,
     private _route: ActivatedRoute,
     private _router: Router
-  ){
+  ) {
     this.article = {
       _id: '',
       title: '',
@@ -31,21 +32,49 @@ export class ArticleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._route.params.subscribe((params: Params) =>{
+    this._route.params.subscribe((params: Params) => {
       let id = params['id']
       this._articleService.getArticle(id).subscribe({
         next: response => {
-          if(response.article){
-            this.article= response.article;
+          if (response.article) {
+            this.article = response.article;
           }
-          else{
+          else {
             this._router.navigate(['/home']);
           }
         },
-        error: error => 
-        this._router.navigate(['/home']),
+        error: error =>
+          this._router.navigate(['/home']),
       });
     });
+  }
+
+  delete(id: string) {
+    Swal.fire({
+      title: '¿Seguro de querer eliminar este artículo?',
+      text: "Si lo eliminas, no podrás recuperarlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._articleService.delete(id).subscribe({
+          next: response => {
+            Swal.fire(
+              'Artículo Eliminado',
+              'El artículo se elimino correctamente',
+              'success'
+            )
+            this._router.navigate(['/blog']);
+          },
+          error: error =>
+            console.log(error),
+        });
+      }
+    })
   }
 
 }

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { ApplicationInitStatus, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Article } from "../models/article";
@@ -35,10 +35,24 @@ export class ArticleService {
         return this._http.get(this.url + 'search/' + searchString);
     }
 
-    create(article:Article):Observable<any>{
+    create(article: Article): Observable<any> {
         let params = JSON.stringify(article);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.post(this.url + 'save', params, {headers: headers});
+        return this._http.post(this.url + 'save', params, { headers: headers });
+    }
+
+    update(id: string, article: Article): Observable<any> {
+        let params = JSON.stringify(article)
+        let headers = new HttpHeaders().set('Content-type', 'Application/json');
+
+        return this._http.put(this.url + 'article/' + id, params, { headers: headers });
+    }
+
+    delete(id: string): Observable<any>{
+        
+        let headers = new HttpHeaders().set('Content-type', 'Application/json');
+
+        return this._http.delete(this.url + 'article/' + id, { headers: headers });
     }
 }
